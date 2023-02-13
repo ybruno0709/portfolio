@@ -2,7 +2,7 @@
 
 <img src="project preview.png" alt="nike product card">
 
-> Esta é a primeira versão do meu portfolio. É necessário
+> Esta é a primeira versão do meu portfolio. Falta completar a responsividade e adicionar descrições para cada tecnologia
 
 ## ☕ Utilizando o Portfolio
 
