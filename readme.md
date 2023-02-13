@@ -6,4 +6,4 @@
 
 ## ☕ Utilizando o Portfolio
 
-Para poder visualizar este projeto, você pode entrar [neste link](https://brunoandrade.netlify.app/pages/).
+Para poder visualizar este projeto, você pode entrar [neste link](https://bit.ly/ybruno0709portfolio).
