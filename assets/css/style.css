@@ -27,9 +27,13 @@ body {
     --color-dark-purple: #0c0454;
     --color-gray: #6b7699;
     --color-html: #e44d26;
+    --color-html-hover: #ff572d;
     --color-css: #3492cb;
+    --color-css-hover: #57b8f5;
     --color-javascript: #ead41c;
+    --color-javascript-hover: #ffeb38;
     --color-jquery: #0863a2;
+    --color-jquery-hover: #2c97e4;
     --pfp-gradient: linear-gradient(
         320deg,
         #ffa200 21%,
@@ -642,6 +646,10 @@ section#technologies #info-dropdown {
     background-color: var(--color-html);
 }
 
+#cube-0 div:hover {
+    background-color: var(--color-html-hover);
+}
+
 /* CSS 3 */
 #cube-1 {
     left: 14rem;
@@ -651,6 +659,10 @@ section#technologies #info-dropdown {
 
 #cube-1 div {
     background-color: var(--color-css);
+}
+
+#cube-1 div:hover {
+    background-color: var(--color-css-hover);
 }
 
 /* JavaScript */
@@ -664,6 +676,10 @@ section#technologies #info-dropdown {
     background-color: var(--color-javascript);
 }
 
+#cube-2 div:hover {
+    background-color: var(--color-javascript-hover);
+}
+
 /* jQuery */
 #cube-3 {
     left: -15rem;
@@ -673,6 +689,10 @@ section#technologies #info-dropdown {
 
 #cube-3 div {
     background-color: var(--color-jquery);
+}
+
+#cube-3 div:hover {
+    background-color: var(--color-jquery-hover);
 }
 
 /* -------------------------------------------------------------------------- */
