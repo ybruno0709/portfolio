@@ -859,6 +859,18 @@ footer .design a {
         align-items: center;
         text-align: center;
     }
+
+    section#technologies #tech-name {
+        justify-content: center;
+    }
+
+    section#technologies #tech-name i {
+        display: none;
+    }
+
+    section#technologies #info-dropdown {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 768px) {
