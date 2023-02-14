@@ -569,6 +569,32 @@ section#technologies .cube.active {
     scale: 150%;
 }
 
+section#technologies .technology-info {
+    max-width: 420px;
+}
+
+section#technologies #tech-name {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+section#technologies #info-dropdown {
+    display: none;
+    color: white;
+    font-size: 1rem;
+    letter-spacing: initial;
+    position: absolute;
+    max-width: 420px;
+}
+
+#png {
+    flex-direction: row;
+    gap: 30rem;
+    font-size: 50rem;
+}
+
 .cube div {
     width: 7rem;
     height: 7rem;
@@ -609,7 +635,7 @@ section#technologies .cube.active {
 #cube-0 {
     left: -14rem;
     top: -14rem;
-    animation: cubeAnim 100s infinite linear;
+    animation: cubeAnim 100s linear;
 }
 
 #cube-0 div {
