@@ -609,7 +609,7 @@ section#technologies .cube.active {
 #cube-0 {
     left: -14rem;
     top: -14rem;
-    animation: cubeAnim 100s linear;
+    animation: cubeAnim 100s infinite linear;
 }
 
 #cube-0 div {
