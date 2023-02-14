@@ -5,9 +5,6 @@ $(() => {
     const description = descriptionEl.html();
     const cursor = $('.cursor');
 
-
-
-
     let i = 0;
 
     setTimeout(() => {
@@ -23,7 +20,6 @@ $(() => {
         if (i < description.length) {
             descriptionEl.html(descriptionEl.html() + description.charAt(i));
             i++;
-            console.log(i);
         }
 
         setTimeout(typing, 150);
