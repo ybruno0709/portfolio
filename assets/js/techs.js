@@ -1,27 +1,69 @@
 $(() => {
     const cubes = $('.cube');
-    const technology = $('#tech-text');
-    const descriptionEl = $('#info-dropdown');
+    const techName = $('#tech-text');
+    const techDescription = $('#info-dropdown');
     const dropdownBtn = $('#tech-name');
     const dropdownSymbol = $('#tech-name i');
-    let current = 0;
+    let currentIndex = 0;
+    let currentCube;
+    let currentTech;
 
-
-    const colorsDefault = ["#e44d26", "#3492cb", "#ead41c", "#0863a2"];
-    const colorsActive = ["#ff572d", "#57b8f5", "#ffeb38", "#2c97e4"];
-    const technologies = ["HTML 5", "CSS 3", "JavaScript", "jQuery"];
-    const descriptionArr = ["HTML (Hypertext Markup Language) é uma linguagem de marcação usada para criar páginas da web. Ela é usada para estruturar o conteúdo da página da web, incluindo texto, imagens, links, vídeos e outros tipos de mídia",
-        "CSS (Cascading Style Sheets) é uma linguagem de folha de estilo usada para definir a aparência e o layout de elementos HTML em uma página da web. Em outras palavras, o CSS é usado para separar a estrutura e conteúdo de uma página da web de sua apresentação visual",
-        "JavaScript é uma linguagem de programação usada principalmente em páginas da web para adicionar recursos interativos, como animações e validação de formulários. É uma ferramenta importante para os desenvolvedores de sites, pois permite criar conteúdo mais dinâmico e envolvente para os usuários. O JavaScript é executado diretamente no navegador do usuário, o que significa que não é necessário instalar nenhum software adicional no computador",
-        "jQuery é uma ferramenta muito útil para os desenvolvedores de sites, pois ajuda a simplificar a forma como as páginas da web interagem e se comportam em relação às ações dos usuários. É como uma coleção de recursos e funções que podem ser usados para fazer animações, criar efeitos visuais e fazer outras coisas legais com o site"
+    const technologies = [
+        {
+            name: "HTML 5",
+            description: "HTML (Hypertext Markup Language) é uma linguagem de marcação usada para criar páginas da web. Ela é usada para estruturar o conteúdo da página da web, incluindo texto, imagens, links, vídeos e outros tipos de mídia",
+            defaultColor: "#e44d26",
+            activeColor: "#ff572d"
+        },
+        {
+            name: "CSS 3",
+            description: "CSS (Cascading Style Sheets) é uma linguagem de folha de estilo usada para definir a aparência e o layout de elementos HTML em uma página da web. Em outras palavras, o CSS é usado para separar a estrutura e conteúdo de uma página da web de sua apresentação visual",
+            defaultColor: "#3492cb",
+            activeColor: "#57b8f5"
+        },
+        {
+            name: "JavaScript",
+            description: "JavaScript é uma linguagem de programação usada principalmente em páginas da web para adicionar recursos interativos, como animações e validação de formulários. É uma ferramenta importante para os desenvolvedores de sites, pois permite criar conteúdo mais dinâmico e envolvente para os usuários. O JavaScript é executado diretamente no navegador do usuário, o que significa que não é necessário instalar nenhum software adicional no computador",
+            defaultColor: "#ead41c",
+            activeColor: "#ffeb38"
+        },
+        {
+            name: "jQuery",
+            description: "jQuery é uma ferramenta muito útil para os desenvolvedores de sites, pois ajuda a simplificar a forma como as páginas da web interagem e se comportam em relação às ações dos usuários. É como uma coleção de recursos e funções que podem ser usados para fazer animações, criar efeitos visuais e fazer outras coisas legais com o site",
+            defaultColor: "#0863a2",
+            activeColor: "#2c97e4"
+        }
     ];
 
-    animation();
+    action();
 
-    let delay = setInterval(() => {
-        checkCurrent();
-        animation();
+    let cubeAnimation = setInterval(() => {
+        changeCurrent();
+        action();
     }, 1250);
+
+    function action() {
+        currentCube = $(cubes[currentIndex]);
+        currentTech = technologies[currentIndex];
+
+        changeTechName();
+        changeDescription();
+
+        cubes.each(i => {
+            let cube = $(cubes[i]);
+            let cubeIndex = cube.attr('id').split('-')[1] * 1;
+
+            changeActiveCube(cube, cubeIndex);
+
+            cube.click(() => {
+                currentCube = cube;
+                currentIndex = cubeIndex;
+
+                action();
+                clearInterval(cubeAnimation);
+            });
+        });
+    }
 
     dropdownBtn.click(() => {
         let actualClass = $(dropdownSymbol).attr('class').split(' ')[1];
@@ -34,85 +76,55 @@ $(() => {
             $('#info-dropdown').show();
         }
 
-        clearInterval(delay);
+        clearInterval(cubeAnimation);
     });
 
-    function checkCurrent() {
-        if (current < cubes.length - 1) {
-            current++;
+    function changeCurrent() {
+        if (currentIndex === cubes.length - 1) {
+            currentIndex = 0;
         } else {
-            current = 0;
+            currentIndex++;
+        }
+    };
+
+    function changeActiveCube(cube, cubeIndex) {
+        if (cubeIndex === currentIndex) {
+            cube.addClass('active');
+        } else {
+            cube.removeClass('active');
         }
     }
 
-    function changeActiveCube() {
-        cubes.each(i => {
-            if ($(cubes[i]).attr('id').split('-')[1] * 1 === current) {
-                $(cubes[i]).addClass('active');
-            } else {
-                $(cubes[i]).removeClass('active');
-            }
-        });
+    function changeTechName() {
+        techName.html(currentTech.name);
+        techName.css('color', currentTech.defaultColor);
+        dropdownBtn.css('color', currentTech.defaultColor);
     }
 
     function changeDescription() {
-        descriptionEl.html(descriptionArr[current]);
+        techDescription.html(currentTech.description);
     }
 
-    function changeCubeColor() {
-        cubes.each(i => {
-            const actual = $(cubes[i]).attr('id').split('-')[1] * 1;
+    function action() {
+        currentCube = $(cubes[currentIndex]);
+        currentTech = technologies[currentIndex];
 
-            $(cubes[i]).mousedown(() => {
-                $(cubes[i]).find('div').css('background-color', colorsActive[actual]);
-            });
-
-            $(cubes[i]).mouseup(() => {
-                $(cubes[i]).find('div').css('background-color', colorsDefault[actual]);
-            });
-        });
-    }
-
-    function changeFaceColor() {
-        cubes.each(i => {
-            const actual = $(cubes[i]).attr('id').split('-')[1] * 1;
-            const faces = $(cubes[i]).find('div');
-
-            faces.each(idx => {
-                $(faces[idx]).hover(() => {
-                    $(faces[idx]).css('background-color', colorsActive[actual]);
-                }, () => {
-                    $(faces[idx]).css('background-color', colorsDefault[actual]);
-                });
-            });
-        });
-    }
-
-    function cubeClick() {
-        cubes.each(i => {
-            $(cubes[i]).click(() => {
-                current = i;
-                $(cubes[i]).addClass('active');
-
-                cubes.removeClass('active');
-
-                animation();
-                clearInterval(delay);
-            });
-        });
-    }
-
-    function textTransform() {
-        technology.html(technologies[current]);
-        technology.css('color', colorsDefault[current]);
-    }
-
-    function animation() {
-        cubeClick();
-        changeActiveCube();
-        changeCubeColor();
-        changeFaceColor();
+        changeTechName();
         changeDescription();
-        textTransform();
+
+        cubes.each(i => {
+            let cube = $(cubes[i]);
+            let cubeIndex = cube.attr('id').split('-')[1] * 1;
+
+            changeActiveCube(cube, cubeIndex);
+
+            cube.off().on('click', () => {
+                currentCube = cube;
+                currentIndex = cubeIndex;
+
+                action();
+                clearInterval(cubeAnimation);
+            });
+        });
     }
 });
