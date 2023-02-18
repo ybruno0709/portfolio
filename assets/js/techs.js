@@ -66,14 +66,16 @@ $(() => {
     }
 
     dropdownBtn.click(() => {
+        infoDrop = $('#info-dropdown');
+
         let actualClass = $(dropdownSymbol).attr('class').split(' ')[1];
 
         $(dropdownSymbol).toggleClass('fa-xmark fa-caret-down');
 
         if (actualClass === 'fa-xmark') {
-            $('#info-dropdown').hide();
+            infoDrop.removeClass('active');
         } else if (actualClass === 'fa-caret-down') {
-            $('#info-dropdown').show();
+            infoDrop.addClass('active');
         }
 
         clearInterval(cubeAnimation);
