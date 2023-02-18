@@ -575,6 +575,7 @@ section#technologies .cube.active {
 
 section#technologies .technology-info {
     max-width: 420px;
+    perpective: 0;
 }
 
 section#technologies #tech-name {
@@ -585,12 +586,19 @@ section#technologies #tech-name {
 }
 
 section#technologies #info-dropdown {
-    display: none;
+    max-width: 420px;
+    display: block;
     color: white;
     font-size: 1rem;
     letter-spacing: initial;
     position: absolute;
-    max-width: 420px;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.3s ease-out;
+}
+
+section#technologies #info-dropdown.active {
+    transform: scaleY(1);
 }
 
 #png {
