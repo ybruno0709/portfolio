@@ -7,12 +7,10 @@ $(() => {
 
     let i = 0;
 
-    setTimeout(() => {
-        typing();
-        checkBlinkStart();
-    }, 1000);
-
     descriptionEl.html('');
+
+    typing();
+    checkBlinkStart();
 
     function typing() {
         cursor.css('opacity', 1);

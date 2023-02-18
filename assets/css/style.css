@@ -2,8 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scrollbar-width: thin;
-    scrollbar-color: #858585 #ffffff;
 }
 
 html {
@@ -74,6 +72,12 @@ section {
     background-image: var(--img-pingu-pfp);
     background-size: cover;
     background-position: center;
+}
+
+/* ------------------------------- ANIMATIONS ------------------------------- */
+.slide-right {
+    animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s
+        both;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -296,6 +300,8 @@ section#projects {
     background-image: url(../images/backgrounds/projects.png);
     gap: 50px;
     color: white;
+    position: relative;
+    display: flex;
 }
 
 section#projects h2 {
@@ -575,7 +581,7 @@ section#technologies .cube.active {
 
 section#technologies .technology-info {
     max-width: 420px;
-    perpective: 0;
+    perspective: 0;
 }
 
 section#technologies #tech-name {
@@ -653,11 +659,6 @@ section#technologies #info-dropdown.active {
 #cube-0 div {
     background-color: var(--color-html);
 }
-/*/
-#cube-0 div:hover {
-    background-color: var(--color-html-active);
-}
-/*
 /* CSS 3 */
 #cube-1 {
     left: 14rem;
@@ -668,10 +669,6 @@ section#technologies #info-dropdown.active {
 #cube-1 div {
     background-color: var(--color-css);
 }
-/* 
-#cube-1 div:hover {
-    background-color: var(--color-css-active);
-} */
 
 /* JavaScript */
 #cube-2 {
@@ -683,10 +680,6 @@ section#technologies #info-dropdown.active {
 #cube-2 div {
     background-color: var(--color-javascript);
 }
-/* 
-#cube-2 div:hover {
-    background-color: var(--color-javascript-active);
-} */
 
 /* jQuery */
 #cube-3 {
@@ -698,10 +691,6 @@ section#technologies #info-dropdown.active {
 #cube-3 div {
     background-color: var(--color-jquery);
 }
-/* 
-#cube-3 div:hover {
-    background-color: var(--color-jquery-active);
-} */
 
 /* -------------------------------------------------------------------------- */
 /*                                   FOOTER                                   */
@@ -798,6 +787,18 @@ footer .design a {
 
     100% {
         transform: rotate3d(1, 1, 1, 360deg);
+    }
+}
+
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 

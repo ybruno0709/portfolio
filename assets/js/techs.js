@@ -1,3 +1,5 @@
+'use strict';
+
 $(() => {
     const cubes = $('.cube');
     const techName = $('#tech-text');
@@ -35,14 +37,15 @@ $(() => {
         }
     ];
 
-    action();
+    changeCurrent();
+    updateAction();
 
     let cubeAnimation = setInterval(() => {
         changeCurrent();
-        action();
+        updateAction();
     }, 1250);
 
-    function action() {
+    function updateAction() {
         currentCube = $(cubes[currentIndex]);
         currentTech = technologies[currentIndex];
 
@@ -52,49 +55,40 @@ $(() => {
         cubes.each(i => {
             let cube = $(cubes[i]);
             let cubeIndex = cube.attr('id').split('-')[1] * 1;
+            let faces = cube.children('div');
 
             changeActiveCube(cube, cubeIndex);
 
-            cube.click(() => {
+            cube.off().on('click', () => {
                 currentCube = cube;
                 currentIndex = cubeIndex;
 
-                action();
+                updateAction();
                 clearInterval(cubeAnimation);
             });
         });
     }
 
     dropdownBtn.click(() => {
-        infoDrop = $('#info-dropdown');
-
         let actualClass = $(dropdownSymbol).attr('class').split(' ')[1];
 
         $(dropdownSymbol).toggleClass('fa-xmark fa-caret-down');
 
         if (actualClass === 'fa-xmark') {
-            infoDrop.removeClass('active');
+            $('#info-dropdown').removeClass('active');
         } else if (actualClass === 'fa-caret-down') {
-            infoDrop.addClass('active');
+            $('#info-dropdown').addClass('active');
         }
 
         clearInterval(cubeAnimation);
     });
 
     function changeCurrent() {
-        if (currentIndex === cubes.length - 1) {
-            currentIndex = 0;
-        } else {
-            currentIndex++;
-        }
-    };
+        currentIndex = currentIndex === cubes.length - 1 ? 0 : currentIndex + 1;
+    }
 
     function changeActiveCube(cube, cubeIndex) {
-        if (cubeIndex === currentIndex) {
-            cube.addClass('active');
-        } else {
-            cube.removeClass('active');
-        }
+        cube.toggleClass('active', cubeIndex === currentIndex);
     }
 
     function changeTechName() {
@@ -105,28 +99,5 @@ $(() => {
 
     function changeDescription() {
         techDescription.html(currentTech.description);
-    }
-
-    function action() {
-        currentCube = $(cubes[currentIndex]);
-        currentTech = technologies[currentIndex];
-
-        changeTechName();
-        changeDescription();
-
-        cubes.each(i => {
-            let cube = $(cubes[i]);
-            let cubeIndex = cube.attr('id').split('-')[1] * 1;
-
-            changeActiveCube(cube, cubeIndex);
-
-            cube.off().on('click', () => {
-                currentCube = cube;
-                currentIndex = cubeIndex;
-
-                action();
-                clearInterval(cubeAnimation);
-            });
-        });
     }
 });
