@@ -974,4 +974,8 @@ footer .design a {
     section#home .content .description span {
         display: none;
     }
+    
+    section#technologies{
+        display: none;
+    }
 }
