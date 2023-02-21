@@ -38,8 +38,6 @@ $(() => {
 
             bullets.removeClass('active');
             $(this).addClass('active');
-
-            console.log(actualIndex);
         });
     }
 
