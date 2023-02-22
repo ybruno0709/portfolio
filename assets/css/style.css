@@ -930,6 +930,10 @@ footer .design a {
     section#home .content h1 {
         font-size: 4rem;
     }
+    
+    section#projects{
+        display: none
+    }
 
     section#home .content p {
         font-size: 2rem;
